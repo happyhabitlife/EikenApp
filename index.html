@@ -23,32 +23,30 @@
         </header>
 
         <div class="controls-area">
-            <div class="top-controls">
-                <div class="mode-selector">
-                    <button id="mode-all" class="mode-button active">📚 全問モード</button>
-                    <button id="mode-review" class="mode-button">🔄 復習モード</button>
-                </div>
-                <button id="print-button" class="print-button">🖨️ 印刷</button>
+            <div class="button-row">
+                <button id="mode-all" class="control-button active">📚 全問</button>
+                <button id="mode-review" class="control-button">🔄 復習</button>
+                <button id="print-wrong-button" class="control-button print-wrong">❌ 間違</button>
+                <button id="print-correct-button" class="control-button print-correct">✅ 覚済</button>
+                <button id="print-all-button" class="control-button print-all">📚 全部</button>
             </div>
             
-            <div class="bottom-controls">
-                <div class="stats-display">
-                    <div class="stat-item">
-                        <span class="stat-emoji">🎯</span>
-                        <span id="correct-count">0</span>/<span id="total-count">0</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-emoji">⚡</span>
-                        <span id="streak-count">0</span>連続
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-emoji">🏆</span>
-                        <span id="level-display">Lv.1</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-emoji">📊</span>
-                        <span id="accuracy-display">0%</span>
-                    </div>
+            <div class="stats-display">
+                <div class="stat-item">
+                    <span class="stat-emoji">🎯</span>
+                    <span id="correct-count">0</span>/<span id="total-count">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-emoji">⚡</span>
+                    <span id="streak-count">0</span>連続
+                </div>
+                <div class="stat-item">
+                    <span class="stat-emoji">🏆</span>
+                    <span id="level-display">Lv.1</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-emoji">📊</span>
+                    <span id="accuracy-display">0%</span>
                 </div>
             </div>
         </div>

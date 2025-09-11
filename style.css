@@ -136,24 +136,19 @@ body {
 .controls-area {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding: 10px;
+    gap: 6px;
+    padding: 6px;
     background: linear-gradient(135deg, #fff5f5, #f0fff4);
     border-bottom: 1px solid var(--border-color);
     flex-shrink: 0;
     font-size: 0.8rem;
 }
 
-.top-controls {
+.button-row {
     display: flex;
+    gap: 4px;
     justify-content: space-between;
-    align-items: center;
-}
-
-.bottom-controls {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .stats-display {
@@ -193,34 +188,51 @@ body {
     gap: 4px;
 }
 
-.mode-button {
-    padding: 8px 16px;
-    border: 2px solid var(--border-color);
+.control-button {
+    padding: 4px 8px;
+    border: 1px solid var(--border-color);
     background: linear-gradient(135deg, #ffffff, #f8f9fa);
     color: var(--primary-text);
-    font-size: 0.85rem;
+    font-size: 0.7rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 20px;
-    box-shadow: 0 2px 4px var(--shadow-light);
+    transition: all 0.2s ease;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px var(--shadow-light);
     white-space: nowrap;
+    flex: 1;
+    text-align: center;
+    min-width: 60px;
 }
 
-.mode-button:hover {
+.control-button:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px var(--shadow-medium);
-    background: linear-gradient(135deg, #ff9ff3, #f368e0);
-    color: white;
-    border-color: #f368e0;
+    box-shadow: 0 2px 6px var(--shadow-medium);
 }
 
-.mode-button.active {
+.control-button.active {
     background: linear-gradient(135deg, #4ecdc4, #44a08d);
     color: white;
     border-color: #4ecdc4;
-    box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3);
-    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(78, 205, 196, 0.3);
+}
+
+.control-button.print-wrong:hover {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    color: white;
+    border-color: #ff6b6b;
+}
+
+.control-button.print-correct:hover {
+    background: linear-gradient(135deg, #27ae60, #229954);
+    color: white;
+    border-color: #27ae60;
+}
+
+.control-button.print-all:hover {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border-color: #3498db;
 }
 
 .print-button {
@@ -682,14 +694,15 @@ body {
         padding: 6px 10px;
     }
     
-    .top-controls {
-        flex-direction: column;
-        gap: 6px;
-        align-items: stretch;
+    .button-row {
+        flex-direction: row;
+        gap: 2px;
     }
     
-    .mode-selector {
-        justify-content: center;
+    .control-button {
+        padding: 3px 4px;
+        font-size: 0.6rem;
+        min-width: 45px;
     }
     
     .stats-display {
@@ -943,9 +956,9 @@ body {
 
 .next-button {
     width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    font-size: 1.1rem;
+    padding: 10px;
+    margin-top: 8px;
+    font-size: 1rem;
     font-weight: 600;
     border: none;
     border-radius: 12px;
@@ -956,6 +969,8 @@ body {
     box-shadow: 0 4px 8px var(--shadow-medium);
     position: relative;
     overflow: hidden;
+    display: block;
+    visibility: visible;
 }
 
 .next-button::before {

@@ -15,7 +15,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const quizBodyEl = document.getElementById('quiz-body');
     const messageAreaEl = document.getElementById('message-area');
     const speakButton = document.getElementById('speak-button');
-    const printButton = document.getElementById('print-button');
+    const printWrongButton = document.getElementById('print-wrong-button');
+    const printCorrectButton = document.getElementById('print-correct-button');
+    const printAllButton = document.getElementById('print-all-button');
     const printContentEl = document.getElementById('print-content');
     
     // 🌟 新しい楽しい要素のDOM要素
@@ -363,8 +365,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    printButton.addEventListener('click', () => {
+    printWrongButton.addEventListener('click', () => {
         if (prepareForPrint('wrong')) {
+            window.print();
+        }
+    });
+
+    printCorrectButton.addEventListener('click', () => {
+        if (prepareForPrint('correct')) {
+            window.print();
+        }
+    });
+
+    printAllButton.addEventListener('click', () => {
+        if (prepareForPrint('all')) {
             window.print();
         }
     });
@@ -711,33 +725,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // --- 5. 初期化処理 ---
     const initializeApp = async () => {
-        // ボタンが重複して作られないようにチェック
-        if (!document.getElementById('print-correct-button')) {
-            const printCorrectButton = document.createElement('button');
-            printCorrectButton.id = 'print-correct-button';
-            printCorrectButton.classList.add('print-button');
-            printCorrectButton.textContent = '✅ 覚えた単語';
-            document.querySelector('.controls-area').appendChild(printCorrectButton);
-            printCorrectButton.addEventListener('click', () => {
-                if (prepareForPrint('correct')) {
-                    window.print();
-                }
-            });
-        }
-
-        if (!document.getElementById('print-all-button')) {
-            const printAllButton = document.createElement('button');
-            printAllButton.id = 'print-all-button';
-            printAllButton.classList.add('print-button');
-            printAllButton.textContent = '📚 全単語';
-            document.querySelector('.controls-area').appendChild(printAllButton);
-            printAllButton.addEventListener('click', () => {
-                if (prepareForPrint('all')) {
-                    window.print();
-                }
-            });
-        }
-        
         // ヒントボタンイベント
         hintButtonEl.addEventListener('click', showHint);
         
