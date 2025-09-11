@@ -3,39 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>英単語クイズ for 美遥</title>
+    <title>SAKAMOTO DAYS 英単語クイズ for 美遥ちゃん</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- 背景アニメーション -->
+    <div class="floating-shapes">
+        <div class="shape" style="width: 30px; height: 30px; background: #3498db; border-radius: 50%;"></div>
+        <div class="shape" style="width: 40px; height: 40px; background: #e74c3c; border-radius: 50%;"></div>
+        <div class="shape" style="width: 25px; height: 25px; background: #f39c12; border-radius: 50%;"></div>
+        <div class="shape" style="width: 35px; height: 35px; background: #27ae60; border-radius: 50%;"></div>
+    </div>
+
     <main class="quiz-container">
         <header class="quiz-header">
             <h1>SAKAMOTO DAYSで学ぶ英単語</h1>
-            <p>SAKAMOTO DAYS English Quiz</p>
+            <p>美遥ちゃんの英検4級チャレンジ！</p>
         </header>
 
         <div class="controls-area">
-            <div class="mode-selector">
-                <button id="mode-all" class="mode-button active">全問モード</button>
-                <button id="mode-review" class="mode-button">復習モード</button>
+            <div class="top-controls">
+                <div class="mode-selector">
+                    <button id="mode-all" class="mode-button active">📚 全問モード</button>
+                    <button id="mode-review" class="mode-button">🔄 復習モード</button>
+                </div>
+                <button id="print-button" class="print-button">🖨️ 印刷</button>
             </div>
-            <button id="print-button" class="print-button">🖨️ 間違えた単語を印刷</button>
+            
+            <div class="bottom-controls">
+                <div class="stats-display">
+                    <div class="stat-item">
+                        <span class="stat-emoji">🎯</span>
+                        <span id="correct-count">0</span>/<span id="total-count">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-emoji">⚡</span>
+                        <span id="streak-count">0</span>連続
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-emoji">🏆</span>
+                        <span id="level-display">Lv.1</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-emoji">📊</span>
+                        <span id="accuracy-display">0%</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div id="quiz-body" class="quiz-body">
-            <div id="question-counter" class="question-counter"></div>
+            <div class="progress-container">
+                <div id="question-counter" class="question-counter"></div>
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+            </div>
+            
+            <div class="character-display">
+                <div id="character-avatar" class="character-avatar">
+                    <span id="character-emoji">🥷</span>
+                    <div id="character-speech" class="character-speech">頑張って！</div>
+                </div>
+            </div>
+            
             <div class="sentence-container">
                 <p id="sentence" class="sentence"></p>
-                <button id="speak-button" class="speak-button">🔊</button>
+                <div class="sentence-controls">
+                    <button id="speak-button" class="speak-button" title="音声再生">🔊</button>
+                    <button id="hint-button" class="hint-button" title="ヒント">💡</button>
+                </div>
             </div>
+            
+            <div id="hint-area" class="hint-area" style="display: none;">
+                <p id="hint-text"></p>
+            </div>
+            
             <div id="choices" class="choices-grid"></div>
         </div>
 
         <div id="feedback-area" class="feedback-area">
-            <p id="feedback-text"></p>
-            <p id="source-info"></p>
-            <p id="grammar-info" class="grammar-info"></p> <!-- 新規追加 -->
-            <button id="next-button" class="next-button">次の問題へ</button>
+            <div class="feedback-content">
+                <p id="feedback-text"></p>
+                <div id="explanation-box" class="explanation-box">
+                    <p id="source-info"></p>
+                    <p id="grammar-info" class="grammar-info"></p>
+                    <div id="related-words" class="related-words"></div>
+                </div>
+            </div>
+            <button id="next-button" class="next-button">次の問題へ ➡️</button>
         </div>
 
         <div id="message-area" class="message-area"></div>
