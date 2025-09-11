@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英単語クイズ for 美遥</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="quiz-container">
+        <header class="quiz-header">
+            <h1>SAKAMOTO DAYSで学ぶ英単語</h1>
+            <p>SAKAMOTO DAYS English Quiz</p>
+        </header>
+
+        <div class="controls-area">
+            <div class="mode-selector">
+                <button id="mode-all" class="mode-button active">全問モード</button>
+                <button id="mode-review" class="mode-button">復習モード</button>
+            </div>
+            <button id="print-button" class="print-button">🖨️ 間違えた単語を印刷</button>
+        </div>
+
+        <div id="quiz-body" class="quiz-body">
+            <div id="question-counter" class="question-counter"></div>
+            <div class="sentence-container">
+                <p id="sentence" class="sentence"></p>
+                <button id="speak-button" class="speak-button">🔊</button>
+            </div>
+            <div id="choices" class="choices-grid"></div>
+        </div>
+
+        <div id="feedback-area" class="feedback-area">
+            <p id="feedback-text"></p>
+            <p id="source-info"></p>
+            <p id="grammar-info" class="grammar-info"></p> <!-- 新規追加 -->
+            <button id="next-button" class="next-button">次の問題へ</button>
+        </div>
+
+        <div id="message-area" class="message-area"></div>
+
+    </main>
+
+    <!-- 印刷専用エリア -->
+    <div id="print-content" class="print-only"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
