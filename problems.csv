@@ -1,5 +1,0 @@
-id,question,choice1,choice2,choice3,choice4,correct_answer_index,explanation
-1,Sakamoto-san is a kind man. What does he ___ at his shop?,sell,sells,selling,to sell,1,"does he" の後なので動詞の原形を使います。「彼は店で何を売っていますか？」
-2,Shin can read people's minds. He is ___ to music now.,listen,listens,listening,listened,3,"is ... now" なので現在進行形 (be動詞 + -ing) になります。「彼は今、音楽を聴いています。」
-3,Sakamoto-san is strong. He can fight ___ a bicycle.,in,on,with,for,3,「～を使って」という道具を示すには前置詞 with を使います。「彼は自転車で戦うことができます。」
-4,Lu is a good friend. She ___ to the shop yesterday.,come,comes,came,coming,3,"yesterday" とあるので過去形を使います。come の過去形は came です。「彼女は昨日、店に来ました。」
