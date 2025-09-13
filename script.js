@@ -477,8 +477,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         };
         
         const characterKey = Object.keys(characters).find(key => characters[key] === currentCharacter);
-        characterSpeechEl.innerHTML = reactions[type][characterKey];
-        characterSpeechEl.classList.add('show');
+        // メッセージ表示機能を削除
+        // characterSpeechEl.innerHTML = reactions[type][characterKey];
+        // characterSpeechEl.classList.add('show');
         
         // キャラクターのクラスを追加
         characterEmojiEl.parentElement.className = 'character-avatar character-' + characterKey;
@@ -493,9 +494,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             }, 10);
         }
         
-        setTimeout(() => {
-            characterSpeechEl.classList.remove('show');
-        }, 2500);
+        // メッセージ非表示タイマーも削除
+        // setTimeout(() => {
+        //     characterSpeechEl.classList.remove('show');
+        // }, 2500);
     };
     
     const changeCharacterForQuestion = (question) => {
@@ -505,20 +507,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         currentCharacter = characters[charKeys[charIndex]];
         characterEmojiEl.textContent = currentCharacter.emoji;
         
-        // キャラクターの応援メッセージ
-        const encouragements = [
-            '頑張って！',
-            'できるよ！',
-            'いけるよ！',
-            'やってみよう！',
-            'チャレンジ！'
-        ];
-        characterSpeechEl.innerHTML = encouragements[Math.floor(Math.random() * encouragements.length)];
-        characterSpeechEl.classList.add('show');
-        
-        setTimeout(() => {
-            characterSpeechEl.classList.remove('show');
-        }, 2000);
+        // 応援メッセージ機能を削除
+        // characterSpeechEl.innerHTML = '';
+        // characterSpeechEl.classList.remove('show');
     };
     
     const playCorrectEffects = () => {
