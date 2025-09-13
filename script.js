@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const loadQuestions = async () => {
         try {
             // ★読み込むファイルを eiken_words_problems.csv に変更
-            const response = await fetch('eiken_words_problems.csv');
+            const response = await fetch('eiken_grade4_complete_800.csv');
             const csvData = await response.text();
             
             const lines = csvData.trim().split('\n');

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>デバッグテスト</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .debug { background: #f0f0f0; padding: 10px; margin: 10px 0; }
+        .error { background: #ffebee; color: #c62828; }
+        .success { background: #e8f5e8; color: #2e7d32; }
+    </style>
+</head>
+<body>
+    <h1>デバッグテスト</h1>
+    <div id="log"></div>
+    <div id="question-display">
+        <h2 id="question-text">問題がここに表示されます</h2>
+        <div id="choices-container"></div>
+    </div>
+
+    <script>
+        const log = document.getElementById('log');
+        
+        function addLog(message, type = 'debug') {
+            console.log(message);
+            const div = document.createElement('div');
+            div.className = `debug ${type}`;
+            div.textContent = new Date().toLocaleTimeString() + ' - ' + message;
+            log.appendChild(div);
+        }
+
+        // CSVパーサー関数
+        const parseCSVLine = (line) => {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+            
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    result.push(current.trim());
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            
+            result.push(current.trim());
+            return result;
+        };
+
+        // テスト実行
+        async function runTest() {
+            addLog('🚀 テスト開始', 'success');
+            
+            try {
+                addLog('📥 CSVファイル読み込み開始...');
+                const response = await fetch('eiken_words_problems.csv');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const csvData = await response.text();
+                addLog(`✅ CSVデータ読み込み成功 (${csvData.length} characters)`, 'success');
+                
+                const lines = csvData.trim().split('\\n');
+                addLog(`📄 行数: ${lines.length}`);
+                
+                // 最初の問題を表示してテスト
+                if (lines.length > 1) {
+                    const firstLine = lines[1];
+                    addLog(`🔍 最初のデータ行: ${firstLine.substring(0, 100)}...`);
+                    
+                    const values = parseCSVLine(firstLine);
+                    addLog(`🔧 パース結果 (${values.length}個):`, 'success');
+                    values.forEach((val, i) => {
+                        addLog(`  [${i}] ${val.substring(0, 50)}${val.length > 50 ? '...' : ''}`);
+                    });
+                    
+                    if (values.length >= 8) {
+                        const questionObj = {
+                            id: parseInt(values[0]),
+                            question: values[1].replace(/^"(.*)"$/, '$1'),
+                            choices: [
+                                values[2].replace(/^"(.*)"$/, '$1'),
+                                values[3].replace(/^"(.*)"$/, '$1'),
+                                values[4].replace(/^"(.*)"$/, '$1'),
+                                values[5].replace(/^"(.*)"$/, '$1')
+                            ],
+                            correct_answer_index: parseInt(values[6]),
+                            explanation: values[7].replace(/^"(.*)"$/, '$1')
+                        };
+                        
+                        addLog('✨ 問題オブジェクト作成成功', 'success');
+                        addLog(`問題ID: ${questionObj.id}`);
+                        addLog(`問題文: ${questionObj.question}`);
+                        addLog(`選択肢: ${questionObj.choices.join(', ')}`);
+                        
+                        // 実際にDOM要素に表示
+                        document.getElementById('question-text').textContent = questionObj.question;
+                        const container = document.getElementById('choices-container');
+                        container.innerHTML = '';
+                        
+                        questionObj.choices.forEach((choice, index) => {
+                            const button = document.createElement('button');
+                            button.textContent = `${index + 1}. ${choice}`;
+                            button.style.display = 'block';
+                            button.style.margin = '5px';
+                            button.style.padding = '10px';
+                            container.appendChild(button);
+                        });
+                        
+                        addLog('🎯 問題表示完了！', 'success');
+                    } else {
+                        addLog(`❌ データが不完全です (${values.length}/8)`, 'error');
+                    }
+                } else {
+                    addLog('❌ CSVにデータがありません', 'error');
+                }
+                
+            } catch (error) {
+                addLog(`❌ エラーが発生: ${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+
+        // ページ読み込み後にテスト実行
+        document.addEventListener('DOMContentLoaded', runTest);
+    </script>
+</body>
+</html>
