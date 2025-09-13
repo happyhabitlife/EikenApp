@@ -61,32 +61,72 @@ document.addEventListener('DOMContentLoaded', async () => {
     let currentCharacter = characters.sakamoto;
 
     // --- 2. CSVデータから問題リストを読み込む関数 ---
+    const parseCsvLine = (line) => {
+        const values = [];
+        let current = '';
+        let inQuotes = false;
+        for (let i = 0; i < line.length; i++) {
+            const char = line[i];
+            if (char === '"') {
+                if (i < line.length - 1 && line[i+1] === '"') {
+                    current += '"';
+                    i++;
+                } else {
+                    inQuotes = !inQuotes;
+                }
+            } else if (char === ',' && !inQuotes) {
+                values.push(current);
+                current = '';
+            } else {
+                current += char;
+            }
+        }
+        values.push(current);
+        return values;
+    };
+
     const loadQuestions = async () => {
         try {
-            // ★読み込むファイルを eiken_words_problems.csv に変更
             const response = await fetch('eiken_grade4_complete_800.csv');
             const csvData = await response.text();
             
-            const lines = csvData.trim().split('\n');
+            const lines = csvData.trim().split(/\r\n|\n/);
             
             ALL_QUESTIONS = lines.slice(1).map(line => {
-                const values = line.split(',');
+                if (!line) return null;
+                const values = parseCsvLine(line);
+                
+                const cleanedValues = values.map(v => {
+                    if (v.startsWith('"') && v.endsWith('"')) {
+                        return v.slice(1, -1).replace(/""/g, '"');
+                    }
+                    return v;
+                });
+
+                if (cleanedValues.length < 8) return null;
+
                 const questionObject = {
-                    id: parseInt(values[0], 10),
-                    question: values[1],
-                    choices: [values[2], values[3], values[4], values[5]],
-                    correct_answer_index: parseInt(values[6], 10),
-                    explanation: values.slice(7).join(',') 
+                    id: parseInt(cleanedValues[0], 10),
+                    question: cleanedValues[1],
+                    choices: [cleanedValues[2], cleanedValues[3], cleanedValues[4], cleanedValues[5]],
+                    correct_answer_index: parseInt(cleanedValues[6], 10),
+                    explanation: cleanedValues.slice(7).join(',') 
                 };
+
+                if (isNaN(questionObject.id) || isNaN(questionObject.correct_answer_index)) {
+                    console.warn('Skipping invalid line:', line);
+                    return null;
+                }
+
                 questionObject.correct_answer = questionObject.choices[questionObject.correct_answer_index - 1];
                 questionObject.full_sentence_japanese = questionObject.explanation;
                 questionObject.grammar_info = '';
                 
                 return questionObject;
-            });
+            }).filter(q => q);
         } catch (error) {
             console.error('問題データの読み込みに失敗しました:', error);
-            messageAreaEl.textContent = '問題データの読み込みに失敗しました。ファイルが存在するか確認してください。';
+            messageAreaEl.textContent = '問題データの読み込みに失敗しました。ファイルを確認してください。';
             messageAreaEl.style.display = 'block';
             quizBodyEl.style.display = 'none';
         }
