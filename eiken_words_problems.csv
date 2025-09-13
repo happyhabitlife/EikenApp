@@ -5,7 +5,7 @@ id,question,choice1,choice2,choice3,choice4,correct_answer_index,explanation
 4,"Aoi ___ what Sakamoto is thinking.",knows,thinks,sees,likes,1,"「knows」は「知っている」。アオイは坂本が何を考えているか知っています。"
 5,"Heisuke needs to ___ a good position for sniping.",take,get,find,see,1,"「take」は「取る」。ヘイスケは狙撃のために良い位置を取る必要があります。"
 6,"Natsuki can ___ any computer.",use,make,get,take,1,"「use」は「使う」。ナツキはどんなコンピューターでも使えます。"
-7. "Sakamoto doesn't ___ to lose his family.",want,need,like,hope,1,"「want」は「欲しい」。坂本は家族を失いたくありません。"
+7,"Sakamoto doesn't ___ to lose his family.",want,need,like,hope,1,"「want」は「欲しい」。坂本は家族を失いたくありません。"
 8,"This mission is very ___.",new,old,good,bad,1,"「new」は「新しい」。この任務は非常に新しいです。"
 9,"Shin thinks this is the ___ thing to do.",right,wrong,good,bad,1,"「right」は「正しい」。シンはこれが正しいことだと考えています。"
 10,"Lu has ___ friends in Japan.",many,few,some,any,1,"「many」は「多くの」。ルーは日本に多くの友達がいます。"
