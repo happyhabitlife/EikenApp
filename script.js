@@ -728,17 +728,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         // ヒントボタンイベント
         hintButtonEl.addEventListener('click', showHint);
         
-        // キャラクタークリックイベント
-        characterEmojiEl.addEventListener('click', () => {
-            const greetings = ['こんにちは！', '頑張ろう！', 'やる気満々！', 'いい調子だね！'];
-            characterSpeechEl.innerHTML = greetings[Math.floor(Math.random() * greetings.length)];
-            characterSpeechEl.classList.add('show');
-            setTimeout(() => characterSpeechEl.classList.remove('show'), 2000);
-            
-            if (navigator.vibrate) {
-                navigator.vibrate(100);
-            }
-        });
+        // キャラクタークリックイベント（応援メッセージ機能を削除）
+        // characterEmojiEl.addEventListener('click', () => {
+        //     // 応援メッセージ機能は削除されました
+        // });
 
         // CSVを読み込んでからクイズを開始
         await loadQuestions();
