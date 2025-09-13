@@ -323,13 +323,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             endMessage += `連続正解: ${currentStreak}問\n`;
             endMessage += `現在のレベル: ${playerLevel}\n\n`;
             
-            if (accuracy >= 90) {
-                endMessage += '🏆 素晴らしい成績です！';
-            } else if (accuracy >= 70) {
-                endMessage += '🌟 よく頑張りました！';
-            } else {
-                endMessage += '💪 復習して再チャレンジしよう！';
-            }
+            // 応援メッセージを全て削除
+            // if (accuracy >= 90) {
+            //     endMessage += '🏆 素晴らしい成績です！';
+            // } else if (accuracy >= 70) {
+            //     endMessage += '🌟 よく頑張りました！';
+            // }
             
             messageAreaEl.innerHTML = endMessage.replace(/\n/g, '<br>');
             messageAreaEl.style.display = 'block';
@@ -432,54 +431,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
     
     const getCorrectMessage = () => {
-        const messages = [
-            '🎉 やったね！',
-            '✨ 素晴らしい！',
-            '🌟 完璧だよ！',
-            '💖 大正解！',
-            '🎯 その調子！'
-        ];
+        // 応援メッセージを削除し、シンプルに表示
         if (currentStreak >= 5) {
-            return `🔥 ${currentStreak}連続正解！すごいよ！`;
+            return `🔥 ${currentStreak}連続正解！`;
         }
-        return messages[Math.floor(Math.random() * messages.length)];
+        return '✓ 正解';
     };
     
     const getIncorrectMessage = (correctAnswer) => {
-        const encouragements = [
-            '💪 次は頑張ろう！',
-            '😊 大丈夫、覚えよう！',
-            '🌈 もう一度チャレンジ！',
-            '⭐ 間違いから学ぼう！'
-        ];
-        const encouragement = encouragements[Math.floor(Math.random() * encouragements.length)];
-        return `正解は「${correctAnswer}」でした。${encouragement}`;
+        // 応援メッセージを削除し、正解のみ表示
+        return `正解は「${correctAnswer}」でした。`;
     };
     
     const showCharacterReaction = (type) => {
-        const reactions = {
-            correct: {
-                sakamoto: '👍 ナイス！',
-                shin: '⚡ キレがあるね！',
-                lu: '🐉 流石だ！',
-                aoi: '🌸 よくできました！',
-                heisuke: '🎯 的確だ！',
-                natsuki: '💻 データ完璧！'
-            },
-            incorrect: {
-                sakamoto: '🤔 次は大丈夫！',
-                shin: '⚡ もう一度だ！',
-                lu: '🐉 諦めるな！',
-                aoi: '🌸 頑張って！',
-                heisuke: '🎯 集中しよう！',
-                natsuki: '💻 分析してみよう！'
-            }
-        };
-        
+        // 応援メッセージ機能を完全削除、キャラクタークラスのみ設定
         const characterKey = Object.keys(characters).find(key => characters[key] === currentCharacter);
-        // メッセージ表示機能を削除
-        // characterSpeechEl.innerHTML = reactions[type][characterKey];
-        // characterSpeechEl.classList.add('show');
         
         // キャラクターのクラスを追加
         characterEmojiEl.parentElement.className = 'character-avatar character-' + characterKey;
