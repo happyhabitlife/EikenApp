@@ -743,16 +743,17 @@ body {
         margin-top: 4px;
     }
     
+    .next-button-container {
+        margin: 8px 0;
+        padding: 0;
+    }
+
     .next-button {
-        width: calc(100% - 16px);
-        margin: 0 8px 10px 8px;
+        width: 100%;
+        margin: 0;
         padding: 10px;
         font-size: 0.9rem;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 100;
+        position: static;
     }
     
     .sentence {
@@ -810,16 +811,17 @@ body {
         margin-bottom: 55px;
     }
     
+    .next-button-container {
+        margin: 6px 0;
+        padding: 0;
+    }
+
     .next-button {
-        width: calc(100% - 12px);
-        margin: 0 6px 8px 6px;
+        width: 100%;
+        margin: 0;
         padding: 8px;
         font-size: 0.85rem;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 100;
+        position: static;
     }
     
     .sentence {
@@ -1075,10 +1077,15 @@ body {
     margin-top: 8px;
 }
 
+.next-button-container {
+    margin: 12px 0;
+    padding: 0;
+}
+
 .next-button {
-    width: calc(100% - 24px);
+    width: 100%;
     padding: 10px;
-    margin: 0 12px 12px 12px;
+    margin: 0;
     font-size: 1rem;
     font-weight: 600;
     border: none;
@@ -1088,13 +1095,10 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 8px var(--shadow-medium);
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    position: static;
     overflow: hidden;
     display: block;
     visibility: visible;
-    z-index: 10;
 }
 
 .next-button::before {

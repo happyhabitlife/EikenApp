@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const sourceInfoEl = document.getElementById('source-info');
     const grammarInfoEl = document.getElementById('grammar-info');
     const nextButton = document.getElementById('next-button');
+    const nextButtonContainer = document.getElementById('next-button-container');
     const modeAllButton = document.getElementById('mode-all');
     const modeReviewButton = document.getElementById('mode-review');
     const quizBodyEl = document.getElementById('quiz-body');
@@ -154,6 +155,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         quizBodyEl.style.display = 'block';
         messageAreaEl.style.display = 'none';
         feedbackAreaEl.style.display = 'none';
+        nextButtonContainer.style.display = 'none';
 
         if (quizMode === 'review') {
             currentQuestions = ALL_QUESTIONS.filter(q => wrongQuestionIds.has(q.id));
@@ -176,6 +178,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const displayQuestion = () => {
         feedbackAreaEl.style.display = 'none';
+        nextButtonContainer.style.display = 'none';
         hintAreaEl.style.display = 'none';
         const question = currentQuestions[currentQuestionIndex];
         
@@ -282,6 +285,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         updateUI();
 
         feedbackAreaEl.style.display = 'block';
+        nextButtonContainer.style.display = 'block';
 
         if (currentQuestionIndex >= currentQuestions.length - 1) {
             nextButton.textContent = '結果を見る 🏆';
@@ -355,6 +359,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             // 🏆 クイズ終了時の特別演出
             quizBodyEl.style.display = 'none';
             feedbackAreaEl.style.display = 'none';
+            nextButtonContainer.style.display = 'none';
             
             const accuracy = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
             let endMessage = '🎉 クイズ終了！お疲れ様でした！\n\n';
